@@ -1,0 +1,65 @@
+{% extends 'basic.html' %}
+
+{% block alert %}
+{% if alert_msg %}
+<div class="alert alert-{{ alert_msg.type }}" role="alert">
+  {{ alert_msg.msg }}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block title %}
+<p class="text-dark">Search the Company</p>
+{% endblock %}
+
+{% block lead %}
+<p class="text-primary">원하는 회사를 검색해보세요.</p>
+<p class="text-secondary">2020년 기준, 외식업 본사 정보를 조회 할 수 있어요.</p>
+<p class="font-weight-light alert-secondary">예시. 더본코리아(O), 더본(O), 홍콩반점(X)</p>
+{% endblock %}
+
+{% block main_body %}
+<form method="GET" action="/company">
+  <input name="companyname" style="margin-bottom:10px" class="form-control" type="text" placeholder="원하는 회사를 입력하세요.">
+  <input type="submit" class="btn btn-primary" value="Search" />
+</form>
+
+<p class="m-5 h3 text-danger"> </p>
+
+{% if data_list %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">상호명</th>
+      <th scope="col">브랜드</th>
+      <th scope="col">가맹점수</th>
+      <th scope="col">매출액</th>
+      <th scope="col">영업이익</th>
+      <th scope="col">평가</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in data_list %}
+    <tr>
+      <th scope="row">{{ user.상호 }}</th>
+      <td>{{ user.브랜드 }}</td>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.매출액}}</td>
+      <td>{{ user.영업이익}}</td>
+      <td>{{ user.평가 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/company/{{ user.브랜드 }}'>
+          ADD
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+
+  </table>
+{% endif %}
+
+{% endblock %}

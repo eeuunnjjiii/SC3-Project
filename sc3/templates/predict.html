@@ -1,0 +1,77 @@
+{% extends 'basic.html' %}
+
+{% block alert %}
+{% if alert_msg %}
+<div class="alert alert-{{ alert_msg.type }}" role="alert">
+  {{ alert_msg.msg }}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block title %}
+<p class="text-dark">Predict</p>
+{% endblock %}
+
+{% block lead %}
+<p class="text-primary">평균매출액을 조회합니다.</p>
+<p class="text-secondary">XGBoost 머신러닝 모델을 이용해 예상 평균매출액을 조회합니다.</p>
+<p class="text-secondary">업종은 숫자로 입력해주세요.</p>
+{% endblock %}
+
+{% block main_body %}
+<form method="GET" action="/predict/sales">
+  <input name="industry" style="margin-bottom:10px" class="form-control" type="text" placeholder="업종">
+  <input name="brandname" style="margin-bottom:10px" class="form-control" type="text" placeholder="브랜드명">
+  <input name="franchisenum" style="margin-bottom:10px" class="form-control" type="text" placeholder="가맹점수">
+  <input name="invest" style="margin-bottom:10px" class="form-control" type="text" placeholder="초기투자비용합계">
+  <input type="submit" class="btn btn-primary" value="Search" />
+</form>
+
+<p class="m-5 h3 text-danger"> </p>
+
+{% if res %}
+<p class="text-secondary">동일 업종 평균 매출액 : {{res[0]}}천원</p>
+<p class="text-secondary">예상 매출 : {{res[1]}}천원</p>
+<p class="text-secondary">머신러닝 모델 분석 결과 </p>
+<p class="text-secondary">{{res[2][0]}}</p>
+<p class="text-secondary">{{res[2][2]}}</p>
+<p class="text-secondary">{{res[2][4]}}</p>
+{% endif %}
+
+{% if data_list %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">업종</th>
+      <th scope="col">브랜드명</th>
+      <th scope="col">가맹점수</th>
+      <th scope="col">초기 투자비용 합계</th>
+      <th scope="col">예상 평균매출액</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in data_list %}
+    <tr>
+      <th scope="row">{{ user.업종 }}</th>
+      <td>{{ user.브랜드 }}</th>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.초기투자비용합계 }}</td>
+      <td>{{ user.예상평균매출액 }}</td>
+      <td>
+        <a class="btn btn-secondary", href='/predict/{{ user.id }}'>
+          Delete
+        </a>
+      </td>
+      <td>
+
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+
+  </table>
+{% endif %}
+
+{% endblock %}

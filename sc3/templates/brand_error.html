@@ -1,0 +1,65 @@
+{% extends 'basic.html' %}
+
+{% block alert %}
+{% if alert_msg %}
+<div class="alert alert-{{ alert_msg.type }}" role="alert">
+  {{ alert_msg.msg }}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block title %}
+<p class="text-dark">Search Your Brand</p>
+{% endblock %}
+
+{% block lead %}
+<p class="text-primary">원하는 브랜드를 검색해보세요.</p>
+<p class="text-secondary">2000여개의 브랜드를 조회 할 수 있어요.</p>
+<p class="font-weight-light alert-secondary">예시. 엽기떡볶이(O), 엽떡(X)</p>
+{% endblock %}
+
+{% block main_body %}
+<form method="GET" action="/brand">
+  <input name="brandname" style="margin-bottom:10px" class="form-control" type="text" placeholder="원하는 브랜드를 입력하세요.">
+  <input type="submit" class="btn btn-primary" value="Search" />
+</form>
+
+<p class="m-5 h3 text-danger">❗️[ERROR]❗️</p>
+<p class="m-5 h3 text-danger">정보공개서에서 찾을 수 없습니다.</p>
+
+{% if data_list %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">브랜드</th>
+      <th scope="col">상호명</th>
+      <th scope="col">평균매출액</th>
+      <th scope="col">초기 투자비용 합계</th>
+      <th scope="col">평가</th>
+      <th scope="col">기준연도</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in data_list %}
+    <tr>
+      <th scope="row">{{ user.브랜드 }}</th>
+      <td>{{ user.상호 }}</td>
+      <td>{{ user.평균매출액 }}</td>
+      <td>{{ user.초기투자비용합계 }}</td>
+      <td>{{ user.평가 }}</td>
+      <td>{{ user.기준연도 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/brand{{ user.브랜드 }}'>
+          Delete
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+
+  </table>
+{% endif %}
+
+{% endblock %}
