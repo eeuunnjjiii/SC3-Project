@@ -22,10 +22,12 @@ def add_brandname(brandname=None):
     check = Check.query.filter(Check.브랜드 == brandname).first()
 
     #이미 추가된 brandname이면,
-    if check:
+    if brandname==None:
+        return render_template('company.html')
+
+    elif check:
             db.session.delete(check)
             db.session.commit()
-
 
     #새로 추가된 brandname이면,
         #SQL 구문 : INSERT INTO Check SELECT * FROM Project WHERE 브랜드 == brandname
