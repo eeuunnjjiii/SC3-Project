@@ -1,6 +1,7 @@
 import pandas as pd
 
-data=pd.read_csv('/Users/jeong-eunji/Downloads/section3/SC3-Project/sc3/franchise.csv')
+url = 'https://raw.githubusercontent.com/eeuunnjjiii/SC3-Project/master/sc3/franchise.csv'
+data=pd.read_csv(url,sep=",")
 
 #필요한 특성 추출
 df=data.copy()
