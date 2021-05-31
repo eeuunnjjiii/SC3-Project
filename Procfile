@@ -1,0 +1,1 @@
+web: gunicorn --workers=2 'sc3:create_app()'
