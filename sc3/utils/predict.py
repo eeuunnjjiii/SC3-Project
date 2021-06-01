@@ -2,6 +2,7 @@ import pandas as pd
 
 url = 'https://raw.githubusercontent.com/eeuunnjjiii/SC3-Project/master/sc3/franchise.csv'
 data=pd.read_csv(url,sep=",")
+data=data.sample(n=10)
 
 #필요한 특성 추출
 df=data.copy()
