@@ -9,34 +9,37 @@
 {% endblock %}
 
 {% block title %}
-<p class="text-dark">Predict</p>
+<h1><p class="text-dark">Predict Your Brand</p></h1>
 {% endblock %}
 
 {% block lead %}
-<p class="text-primary">평균매출액을 조회합니다.</p>
-<p class="text-secondary">XGBoost 머신러닝 모델을 이용해 예상 평균매출액을 조회합니다.</p>
-<p class="text-secondary">업종은 숫자로 입력해주세요.</p>
+<h4><p class="text-muted">머신러닝 모델을 이용해 평균 매출액을 예측해보세요.</p></h4>
+<p class="m-4 h5 text-warning"> - </p>
+<h5><p class="text-dark">관심 있는 브랜드 홈페이지에서 정보 확인 후 입력해주세요.</p></h5>
+<p class="text-body">[ 주의사항 ]</p>
+<p class="text-secondary">업종 : 숫자로 입력</p>
+<p class="font-weight-light alert-secondary small">1:한식, 2:서양식, 3:분식, 4:일식, 5:중식, 6:기타외국식, 7:기타외식, 8:치킨, 9:피자, 10:패스트푸드, 11:커피, 12:음료(커피 외), 13:아이스크림/빙수, 14:제과제빵, 15:주점</p>
+
+<p class="text-secondary">초기투자비용합계 단위 : 천원</p>
 {% endblock %}
 
 {% block main_body %}
 <form method="GET" action="/predict/sales">
-  <input name="industry" style="margin-bottom:10px" class="form-control" type="text" placeholder="업종">
-  <input name="brandname" style="margin-bottom:10px" class="form-control" type="text" placeholder="브랜드명">
-  <input name="franchisenum" style="margin-bottom:10px" class="form-control" type="text" placeholder="가맹점수">
-  <input name="invest" style="margin-bottom:10px" class="form-control" type="text" placeholder="초기투자비용합계">
-  <input type="submit" class="btn btn-primary" value="Search" />
+  <input name="industry" style="margin-bottom:10px" class="form-control" type="text" placeholder="업종을 숫자로 입력하세요.">
+  <input name="brandname" style="margin-bottom:10px" class="form-control" type="text" placeholder="브랜드명을 입력하세요.">
+  <input name="franchisenum" style="margin-bottom:10px" class="form-control" type="text" placeholder="가맹점수를 입력하세요.">
+  <input name="invest" style="margin-bottom:10px" class="form-control" type="text" placeholder="초기투자비용합계를 입력하세요. (단위: 천원)">
+  <input type="submit" class="btn btn-warning" value="Search" />
 </form>
 
 <p class="m-5 h3 text-danger"> </p>
 
 {% if res %}
-<p class="text-secondary">동일 업종 평균 매출액 : {{res[0]}}천원</p>
-<p class="text-secondary">예상 매출 : {{res[1]}}천원</p>
-<p class="text-secondary">머신러닝 모델 분석 결과 </p>
-<p class="text-secondary">{{res[2][0]}}</p>
-<p class="text-secondary">{{res[2][2]}}</p>
-<p class="text-secondary">{{res[2][4]}}</p>
+<p class="text-secondary">동일 업종 평균 매출액 : {{res[0]}},000원</p>
+<p class="text-secondary">예상 매출액 : {{res[1]}},000원</p>
 {% endif %}
+
+<p class="m-5 h3 text-danger"> </p>
 
 {% if data_list %}
 <table class="table">

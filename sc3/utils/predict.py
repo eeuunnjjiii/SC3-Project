@@ -93,15 +93,15 @@ def predict(업종,가맹점수,초기투자비용합계):
     feature_values = df.values[0]
     shaps = pd.Series(shap_values[0], zip(feature_names, feature_values))
 
-    # 결과를 프린트 합니다.
-    # result1 = f'평균가격: {explainer.expected_value:,.0f}천원 \n'
-    # result2 = f'예측가격: {pred:,.0f}천원 \n'
-    # result3 = shaps.to_string()
+
+    result1 = format(int(explainer.expected_value), ',')
+    result2 = format(int(pred), ',')
+    result3 = shaps.to_string()
 
 
-    res = shaps.to_string()
-    res_print = res.split('\n')[0],'\n', res.split('\n')[1],'\n', res.split('\n')[2]
-    return (int(explainer.expected_value), int(pred), res_print)
+    # res = shaps.to_string()
+    # res_print = res.split('\n')[0],'\n', res.split('\n')[1],'\n', res.split('\n')[2]
+    return (result1, result2)
 
 
     # SHAP Force Plot

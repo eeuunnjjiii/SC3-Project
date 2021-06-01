@@ -10,28 +10,40 @@ bp = Blueprint('company', __name__, url_prefix='/company')
 @bp.route('/')
 def index(): #http://127.0.0.1:5000/company/?companyname=핫시즈너
     companyname = request.args.get('companyname', None)
+
     keyword="%{}%".format(companyname)
     data_list=Project.query.filter(Project.상호.like(keyword), Project.기준연도==2020).all()
-    return render_template('company.html', data_list=data_list)
+    
+    #companyname이 주어지지 않았을 때,
+    if companyname == None:
+        return render_template('company.html')
 
-@bp.route('/<brandname>')
-def add_brandname(brandname=None):
+    #companyname이 data_list에 없을 때,
+    elif not data_list:
+        return render_template('company_error.html')
+    
+    else:
+        return render_template('company.html', data_list=data_list)
+
+@bp.route('/<companyname>/<brandname>')
+def add_brandname(companyname=None, brandname=None):
 
     #db에서 조회
     choice = Project.query.filter(Project.브랜드 == brandname, Project.기준연도==2020).first()
     check = Check.query.filter(Check.브랜드 == brandname).first()
 
-    #이미 추가된 brandname이면,
-    if brandname==None:
+    #brandname이나 companyname이 주어지지 않으면,
+    if brandname==None or companyname==None:
         return render_template('company.html')
-
+    
+    #이미 추가된 brandname이면,
     elif check:
-            db.session.delete(check)
-            db.session.commit()
+        db.session.delete(check)
+        db.session.commit()
 
-    #새로 추가된 brandname이면,
-        #SQL 구문 : INSERT INTO Check SELECT * FROM Project WHERE 브랜드 == brandname
-
+        #새로 추가된 brandname이면,
+            #SQL 구문 : INSERT INTO Check SELECT * FROM Project WHERE 브랜드 == brandname
+    
     brand = Check(id=choice.id, 
         브랜드=choice.브랜드,
         업종=choice.업종,
@@ -52,10 +64,13 @@ def add_brandname(brandname=None):
         명의변경=choice.명의변경,
         평균매출액=choice.평균매출액,
         평가=choice.평가)
-        
+                
     db.session.add(brand)
     db.session.commit()
 
     alert_msg = main_funcs.msg_processor(0)
 
-    return render_template('company.html', alert_msg=alert_msg)
+    keyword="%{}%".format(companyname)
+    data_list=Project.query.filter(Project.상호.like(keyword), Project.기준연도==2020).all()
+    
+    return render_template('company.html', alert_msg=alert_msg, data_list=data_list)

@@ -50,7 +50,7 @@ def sales():
                 브랜드=brandname,
                 가맹점수=franchisenum,
                 초기투자비용합계=invest,
-                예상평균매출액=res[1])
+                예상평균매출액=int(res[1].replace(',', '')))
 
     db.session.add(brand)
     db.session.commit()
@@ -58,7 +58,6 @@ def sales():
     data_list=Predict.query.all()
 
     return render_template('predict.html', res=res, alert_msg = alert_msg, data_list=data_list)
-
 
 
 

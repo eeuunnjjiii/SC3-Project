@@ -9,23 +9,24 @@
 {% endblock %}
 
 {% block title %}
-<p class="text-dark">Search Your Industry</p>
+<h1><p class="text-dark">Search Your Industry</p></h1>
 {% endblock %}
 
 {% block lead %}
-<p class="text-primary">원하는 업종을 검색해보세요.</p>
-<p class="text-secondary">15개 업종의 2020년 상위 매출 10개 브랜드를 알려드려요.</p>
-<p class="font-weight-light alert-secondary">분류 : 한식/일식/중식/분식/서양식/패스트푸드/치킨/피자/커피/음료(커피 외)/주점/아이스크림,빙수/제과제빵/기타외식/기타외국식</p>
+<h4><p class="text-muted">관심 있는 업종을 검색해보세요.</p></h4>
+<p class="m-4 h5 text-warning"> - </p>
+<h5><p class="text-dark">2020년 상위 매출 10개 브랜드 업종별 검색</p></h5>
+<p class="font-weight-light alert-secondary">분류 🔍  한식 / 일식 / 중식 / 분식 / 서양식 / 패스트푸드 / 치킨 / 피자 / 커피 / 음료(커피 외) / 주점 / 아이스크림,빙수 / 제과제빵 / 기타외식 / 기타외국식</p>
 {% endblock %}
 
 {% block main_body %}
 <form method="GET" action="/industry">
   <input name="industryname" style="margin-bottom:10px" class="form-control" type="text" placeholder="원하는 업종을 입력하세요.">
-  <input type="submit" class="btn btn-primary" value="Search" />
+  <input type="submit" class="btn btn-warning" value="Search" />
 </form>
 
 <p class="m-5 h3 text-danger">❗️[ERROR]❗️</p>
-<p class="m-5 h3 text-danger">정보공개서에서 찾을 수 없습니다.</p>
+<p class="m-5 h3 text-danger">입력한 업종은 정보공개서에서 찾을 수 없습니다.</p>
 
 {% if data_list %}
 <table class="table">

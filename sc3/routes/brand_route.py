@@ -9,7 +9,6 @@ bp = Blueprint('brand', __name__, url_prefix='/brand')
 @bp.route('/')
 def index(): #http://127.0.0.1:5000/brand/?brandname=
     brandname = request.args.get('brandname', None)
-    #industry=request.args.get('industry', None)
 
     keyword="%{}%".format(brandname)
     data_list=Project.query.filter(Project.브랜드.like(keyword)).all()
@@ -33,17 +32,18 @@ def add_brandname(brandname=None):
     choice = Project.query.filter(Project.브랜드 == brandname, Project.기준연도==2020).first()
     check = Check.query.filter(Check.브랜드 == brandname).first()
 
-    #이미 추가된 brandname이면,
+    #brandname이 주어지지 않으면,
     if brandname==None:
        return render_template('brand.html') 
-    
+
+    #이미 추가된 brandname이면,    
     elif check:
-            db.session.delete(check)
-            db.session.commit()
+        db.session.delete(check)
+        db.session.commit()
 
 
-    #새로 추가된 brandname이면,
-        #SQL 구문 : INSERT INTO Check SELECT * FROM Project WHERE 브랜드 == brandname
+        #새로 추가된 brandname이면,
+            #SQL 구문 : INSERT INTO Check SELECT * FROM Project WHERE 브랜드 == brandname
 
     brand = Check(id=choice.id, 
         브랜드=choice.브랜드,
@@ -65,10 +65,13 @@ def add_brandname(brandname=None):
         명의변경=choice.명의변경,
         평균매출액=choice.평균매출액,
         평가=choice.평가)
-        
+            
     db.session.add(brand)
     db.session.commit()
 
     alert_msg = main_funcs.msg_processor(0)
+
+    keyword="%{}%".format(brandname)
+    data_list=Project.query.filter(Project.브랜드.like(keyword)).all()
     
-    return render_template('brand.html', alert_msg=alert_msg)
+    return render_template('brand.html', alert_msg=alert_msg, data_list=data_list)

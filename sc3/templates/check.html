@@ -9,21 +9,22 @@
 {% endblock %}
 
 {% block title %}
-<p class="text-dark">후보군</p>
+<h1><p class="text-dark">Make It Your Brand</p></h1>
 {% endblock %}
 
 {% block lead %}
-<p class="text-primary">후보군으로 선택한 브랜드의 상세한 정보를 조회합니다.</p>
-<p class="text-secondary">Delete로 삭제가 가능합니다.</p>
+<h4><p class="text-muted">관심 있는 브랜드를 비교분석 해보세요.</p></h4>
+<p class="m-4 h5 text-warning"> - </p>
+<p class="text-secondary">'Delete'로 삭제가 가능합니다.</p>
 {% endblock %}
 
 {% block main_body %}
 
 
 <p class="m-5 h3 text-danger"> </p>
-
+<p class="text-justify text-black-50">* 데이터 출처 : 공정거래위원회 가맹사업거래 / 단위 : 천원</p>
 {% if data_list %}
-<table class="table">
+<table class="table table-striped w-auto">
   <thead>
     <tr>
       <th scope="col">브랜드</th>
