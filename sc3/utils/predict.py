@@ -1,6 +1,8 @@
 import pandas as pd
 
-url = 'https://raw.githubusercontent.com/eeuunnjjiii/SC3-Project/master/sc3/franchise.csv'
+#heroku 배포를 위한 데이터 수정
+url='https://raw.githubusercontent.com/eeuunnjjiii/SC3-Project/master/sc3/franchise2.csv'
+#url = 'https://raw.githubusercontent.com/eeuunnjjiii/SC3-Project/master/sc3/franchise.csv'
 data=pd.read_csv(url,sep=",")
 
 #heroku 배포를 위해 데이터 개수 제한
