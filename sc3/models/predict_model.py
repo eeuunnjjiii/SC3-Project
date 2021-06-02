@@ -1,4 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
 from sc3 import db
 
 

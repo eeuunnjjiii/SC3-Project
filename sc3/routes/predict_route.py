@@ -14,11 +14,11 @@ def index():
     keyword="%{}%".format(brandname)
     data_list=Project.query.filter(Project.브랜드.like(keyword)).all()
 
-    #brandname이 주어지지 않았을 때
+    #brandname이 주어지지 않으면,
     if brandname == None:
         return render_template('predict.html')
 
-    #brandname이 db에 없을 때
+    #brandname이 db에 없으면,
     elif not data_list :
         return render_template('brand_error.html')
 

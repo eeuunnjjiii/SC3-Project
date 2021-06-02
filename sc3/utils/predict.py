@@ -1,12 +1,7 @@
 import pandas as pd
 
-#heroku 배포를 위한 데이터 수정
-url='https://raw.githubusercontent.com/eeuunnjjiii/SC3-Project/master/sc3/franchise2.csv'
-#url = 'https://raw.githubusercontent.com/eeuunnjjiii/SC3-Project/master/sc3/franchise.csv'
+url = 'https://raw.githubusercontent.com/eeuunnjjiii/SC3-Project/master/sc3/franchise.csv'
 data=pd.read_csv(url,sep=",")
-
-#heroku 배포를 위해 데이터 개수 제한
-data=data.sample(n=10)
 
 #필요한 특성 추출
 df=data.copy()
@@ -60,18 +55,16 @@ mae=mean_absolute_error(y_train,y_pred)
 #머신러닝모델 생성
 from xgboost import XGBRegressor
 
-#heroku를 위해 모델 하이퍼파라미터 수정
-model = XGBRegressor()
+
+model = XGBRegressor(base_score=0.5, booster=None, colsample_bylevel=1,
+             colsample_bynode=1, colsample_bytree=1, gamma=0, gpu_id=-1,
+             importance_type='gain', interaction_constraints=None,
+             learning_rate=0.2, max_delta_step=0, max_depth=7,
+             min_child_weight=1, monotone_constraints=None,
+             n_estimators=1000, n_jobs=-1, num_parallel_tree=1, random_state=2,
+             reg_alpha=0, reg_lambda=1, scale_pos_weight=1, subsample=1,
+             tree_method=None, validate_parameters=False, verbosity=None)
 model.fit(X_train, y_train)
-# model = XGBRegressor(base_score=0.5, booster=None, colsample_bylevel=1,
-#              colsample_bynode=1, colsample_bytree=1, gamma=0, gpu_id=-1,
-#              importance_type='gain', interaction_constraints=None,
-#              learning_rate=0.2, max_delta_step=0, max_depth=7,
-#              min_child_weight=1, monotone_constraints=None,
-#              n_estimators=1000, n_jobs=-1, num_parallel_tree=1, random_state=2,
-#              reg_alpha=0, reg_lambda=1, scale_pos_weight=1, subsample=1,
-#              tree_method=None, validate_parameters=False, verbosity=None)
-# model.fit(X_train, y_train)
 #print('검증 데이터 스코어:',model.score(X_val, y_val)) > 0.564
 
 #테스트 데이터 결과
@@ -120,5 +113,3 @@ def predict(업종,가맹점수,초기투자비용합계):
     #     shap_values=shap_values, 
     #     features=df
     # )
-
-predict(1,263,47000)

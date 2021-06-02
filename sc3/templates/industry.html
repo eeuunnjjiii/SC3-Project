@@ -17,6 +17,8 @@
 <p class="m-4 h5 text-warning"> - </p>
 <h5><p class="text-dark">2020년 상위 매출 10개 브랜드 업종별 검색</p></h5>
 <p class="font-weight-light alert-secondary">분류 🔍  한식 / 일식 / 중식 / 분식 / 서양식 / 패스트푸드 / 치킨 / 피자 / 커피 / 음료(커피 외) / 주점 / 아이스크림,빙수 / 제과제빵 / 기타외식 / 기타외국식</p>
+<a href="https://franchise.ftc.go.kr/main/index.do"><p class="text-muted">* 데이터 출처 : 공정거래위원회 가맹사업거래</p></a>
+
 {% endblock %}
 
 {% block main_body %}
@@ -26,11 +28,12 @@
 </form>
 
 <p class="m-5 h3 text-warning"> </p>
-<p class="text-justify text-black-50">* 데이터 출처 : 공정거래위원회 가맹사업거래 / 단위 : 천원</p>
+<p class="text-justify text-black-50 text-right">단위 : 천원&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  </p>
 {% if data_list %}
 <table class="table">
   <thead>
     <tr>
+      <th scope="col">순위</th>
       <th scope="col">업종</th>
       <th scope="col">브랜드</th>
       <th scope="col">상호명</th>
@@ -39,9 +42,165 @@
     </tr>
   </thead>
   <tbody>
-    {% for user in data_list %}
+    {% for user in data_list[:1] %}
     <tr>
-      <th scope="row">{{ user.업종 }}</th>
+      <th scope="row">1</th>
+      <td>{{ user.업종 }}</td>
+      <td>{{ user.브랜드 }}</td>
+      <td>{{ user.상호 }}</td>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.평균매출액 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/industry/{{ user.업종 }}/{{ user.브랜드 }}'>
+          ADD
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+
+    {% for user in data_list[1:2] %}
+    <tr>
+      <th scope="row">2</th>
+      <td>{{ user.업종 }}</td>
+      <td>{{ user.브랜드 }}</td>
+      <td>{{ user.상호 }}</td>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.평균매출액 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/industry/{{ user.업종 }}/{{ user.브랜드 }}'>
+          ADD
+        </a>
+      </td>
+    </tr>
+
+    {% endfor %}
+
+        {% for user in data_list[2:3] %}
+    <tr>
+      <th scope="row">3</th>
+      <td>{{ user.업종 }}</td>
+      <td>{{ user.브랜드 }}</td>
+      <td>{{ user.상호 }}</td>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.평균매출액 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/industry/{{ user.업종 }}/{{ user.브랜드 }}'>
+          ADD
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+
+        {% for user in data_list[3:4] %}
+    <tr>
+      <th scope="row">4</th>
+      <td>{{ user.업종 }}</td>
+      <td>{{ user.브랜드 }}</td>
+      <td>{{ user.상호 }}</td>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.평균매출액 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/industry/{{ user.업종 }}/{{ user.브랜드 }}'>
+          ADD
+        </a>
+      </td>
+    </tr>
+    {% endfor %}  
+
+        {% for user in data_list[4:5] %}
+    <tr>
+      <th scope="row">5</th>
+      <td>{{ user.업종 }}</td>
+      <td>{{ user.브랜드 }}</td>
+      <td>{{ user.상호 }}</td>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.평균매출액 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/industry/{{ user.업종 }}/{{ user.브랜드 }}'>
+          ADD
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+
+        {% for user in data_list[5:6] %}
+    <tr>
+      <th scope="row">6</th>
+      <td>{{ user.업종 }}</td>
+      <td>{{ user.브랜드 }}</td>
+      <td>{{ user.상호 }}</td>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.평균매출액 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/industry/{{ user.업종 }}/{{ user.브랜드 }}'>
+          ADD
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+
+        {% for user in data_list[6:7] %}
+    <tr>
+      <th scope="row">7</th>
+      <td>{{ user.업종 }}</td>
+      <td>{{ user.브랜드 }}</td>
+      <td>{{ user.상호 }}</td>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.평균매출액 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/industry/{{ user.업종 }}/{{ user.브랜드 }}'>
+          ADD
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+
+        {% for user in data_list[7:8] %}
+    <tr>
+      <th scope="row">8</th>
+      <td>{{ user.업종 }}</td>
+      <td>{{ user.브랜드 }}</td>
+      <td>{{ user.상호 }}</td>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.평균매출액 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/industry/{{ user.업종 }}/{{ user.브랜드 }}'>
+          ADD
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+
+
+        {% for user in data_list[8:9] %}
+    <tr>
+      <th scope="row">9</th>
+      <td>{{ user.업종 }}</td>
+      <td>{{ user.브랜드 }}</td>
+      <td>{{ user.상호 }}</td>
+      <td>{{ user.가맹점수 }}</td>
+      <td>{{ user.평균매출액 }}</td>
+
+      <td>
+        <a class="btn btn-secondary", href='/industry/{{ user.업종 }}/{{ user.브랜드 }}'>
+          ADD
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+
+        {% for user in data_list[9:] %}
+    <tr>
+      <th scope="row">10</th>
+      <td>{{ user.업종 }}</td>
       <td>{{ user.브랜드 }}</td>
       <td>{{ user.상호 }}</td>
       <td>{{ user.가맹점수 }}</td>
@@ -56,7 +215,6 @@
     {% endfor %}
 
   </tbody>
-
   </table>
 {% endif %}
 

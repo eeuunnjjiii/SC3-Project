@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from sc3.models.check_model import Check
 from sc3 import db
 from sc3.utils import main_funcs

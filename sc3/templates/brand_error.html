@@ -17,6 +17,7 @@
 <p class="m-4 h5 text-warning"> - </p>
 <h5><p class="text-dark">2017년-2020년 브랜드 검색</p></h5>
 <p class="font-weight-light alert-secondary">예시 🔍 불닭발땡초동대문엽기떡볶이 -> 엽기떡볶이 ⭕️, 엽기 ⭕️, 엽떡 ❌</p>
+<a href="https://franchise.ftc.go.kr/main/index.do"><p class="text-muted">* 데이터 출처 : 공정거래위원회 가맹사업거래</p></a>
 {% endblock %}
 
 {% block main_body %}
@@ -26,7 +27,11 @@
 </form>
 
 <p class="m-5 h3 text-danger">❗️[ERROR]❗️</p>
+{% if link_text %}
+<p class="m-5 h4 text-dark">홈페이지 주소 안내 👉🏻 {{ link_text }} </p>
+{% endif %}
 <p class="m-5 h3 text-danger">입력한 브랜드는 정보공개서에서 찾을 수 없습니다.</p>
+
 
 {% if data_list %}
 <table class="table">

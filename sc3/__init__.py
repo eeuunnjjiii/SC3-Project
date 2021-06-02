@@ -11,15 +11,6 @@ def create_app(config=None):
     app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:1234@localhost:3306/project?charset=utf8"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-    # #db 연결
-    # if app.config["ENV"] == 'production':
-    #     app.config.from_object('config.ProductionConfig')
-    # else:
-    #     app.config.from_object('config.DevelopmentConfig')
-
-    # if config is not None:
-    #     app.config.update(config)
-
     #orm 연결
     db.init_app(app)
 

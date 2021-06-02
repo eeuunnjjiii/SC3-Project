@@ -1,4 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
 from sc3 import db
 
 class Project(db.Model):
@@ -24,10 +23,7 @@ class Project(db.Model):
     명의변경 = db.Column(db.Integer())
     평균매출액 = db.Column(db.Integer())
     평가 = db.Column(db.String(45))
-
+    tweets = db.relationship('Check', backref='project', cascade = 'all,delete')
+    
     def __repr__(self):
         return f'Data{self.브랜드}의 평가는 {self.평가} 입니다.'
-
-    
-#def get_data():
-#    return Project.query.filter_by(브랜드='죠스떡볶이').all()

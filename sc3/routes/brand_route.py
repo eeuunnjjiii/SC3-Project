@@ -3,6 +3,9 @@ from sc3.models.data_model import Project
 from sc3.models.check_model import Check
 from sc3 import db
 from sc3.utils import main_funcs
+import requests
+from bs4 import BeautifulSoup
+
 
 bp = Blueprint('brand', __name__, url_prefix='/brand')
 
@@ -19,10 +22,22 @@ def index(): #http://127.0.0.1:5000/brand/?brandname=
 
     #brandname이 db에 없을 때
     elif not data_list :
-        return render_template('brand_error.html')
+        try :
+            address_keyword = str(brandname)
+            url="https://search.naver.com/search.naver?where=nexearch&sm=top_sug.pre&fbm=0&acr=1&acq=60&qdt=0&ie=utf8&query="+ address_keyword
+            page = requests.get(url)
+
+            soup = BeautifulSoup(page.content, 'html.parser')
+            link_text=soup.find(class_='source_url').text
+
+            return render_template('brand_error.html', link_text=link_text)
+
+        except:
+            return render_template('brand_error.html')
 
     else:
         return render_template('brand.html', data_list=data_list)
+       
 
 
 @bp.route('/<brandname>')
@@ -42,29 +57,16 @@ def add_brandname(brandname=None):
         db.session.commit()
 
 
-        #새로 추가된 brandname이면,
-            #SQL 구문 : INSERT INTO Check SELECT * FROM Project WHERE 브랜드 == brandname
-
-    brand = Check(id=choice.id, 
-        브랜드=choice.브랜드,
-        업종=choice.업종,
-        상호=choice.상호,
-        가맹점수=choice.가맹점수,
-        기준연도=choice.기준연도,
-        자산=choice.자산,
-        자본=choice.자본,
-        부채=choice.부채,
-        법위반횟수=choice.법위반횟수,
-        매출액=choice.매출액,
-        영업이익=choice.영업이익,
-        당기순이익=choice.당기순이익,
-        초기투자비용합계=choice.초기투자비용합계,
-        신규개점=choice.신규개점,
-        계약종료=choice.계약종료,
-        계약해지=choice.계약해지,
-        명의변경=choice.명의변경,
-        평균매출액=choice.평균매출액,
-        평가=choice.평가)
+    #새로 추가된 brandname이면,
+    brand = Check(브랜드_id=choice.id, 
+            브랜드=choice.브랜드,
+            상호=choice.상호,
+            가맹점수=choice.가맹점수,
+            초기투자비용합계=choice.초기투자비용합계,
+            신규개점=choice.신규개점,
+            계약종료=choice.계약종료,
+            계약해지=choice.계약해지,
+            평균매출액=choice.평균매출액,)
             
     db.session.add(brand)
     db.session.commit()

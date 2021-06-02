@@ -1,5 +1,3 @@
-#from sklearn.linear_model import LogisticRegression
-
 def msg_processor(msg_code):
     '''
     msg_processor returns a msg object with 'msg', 'type'
